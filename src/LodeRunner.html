@@ -1,0 +1,153 @@
+<html><!--
+Lode Runner!!! HTML
+
+01234567890123456789012345678901234567890123456789012345678901234567890123456789
+--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>Linguagens e Ambientes de Programação (2019/2020) 
+	   [Eng.Inf. - DI/FCT/UNL] - 3º projeto prático (Javascript)</title>
+
+<script type="text/javascript" src="LodeRunner_files/LodeRunner0.js"></script>
+<script type="text/javascript" src="LodeRunner_files/LodeRunner.js"></script>
+
+</head>
+
+<style>
+
+	canvas {
+		display:block;
+		background-color: white;
+		margin: auto;
+		/*Google searchbar box-shadow*/
+		box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+	}
+
+	div.container {
+		/* background-color: blue; */
+		width: 756;
+		margin: 1% auto;
+	}
+
+	.instructions{
+		border:3px dashed #000000;
+		margin: 1% 0%;
+		padding: 2% 5%;
+	}
+
+	.gameButton {
+		cursor: pointer;
+		padding: 8px 1rem;
+		border: 2px solid black; /*rgb(166, 37, 38, 0.7);*/
+		margin: 0px 10px;
+		font-weight: bold;
+		border-radius: 5px;
+	}
+
+	.gameButton:hover {
+		box-shadow: 0 0 5px rgba(33,33,33,.5); 
+	}
+
+	.info {
+		padding: 8px;
+		border: 1px solid black;
+		display: inline-block;
+		width: 15%;
+	}
+
+</style>
+
+
+<body onload="onLoad()">
+<p><b>LodeRunner</b> -- David Neves (55539), Rodrigo Mesquita (55902)</p>
+<form name="form1">
+
+	<canvas id="canvas1" width="504" height="272" 
+	style="border:2px solid #000000;">
+		Your browser doesn't support the HTML5 CANVAS tag.
+	</canvas>
+
+	<div class="container" style="text-align: center;"">
+		<div class="info">
+			<span class="">level: <span id="worldlevel">0</span>/16</span>
+		</div>
+		<div class="info">
+			<span class="">time: <span id="time">0</span></span>
+		</div>
+		<div class="info">
+			<span class="">coins left: <span id="coinsleft">0</span></span>
+		</div>
+		<div class="info">
+			<span class="">score: <span id="playerscore">0</span></span>
+		</div>
+		<div class="info">
+			<span class="">highscore: <span id="highscore">0</span></span>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div style="text-align: center;">
+			<a class="gameButton" name="restart" 
+			onclick="control.restartGame()">Restart</a>
+
+			<a class="gameButton" name="nextlevel" 
+			onclick="control.gotoNextLevel()">Next Level</a>
+
+			<a class="gameButton" name="toggleaudio" 
+			value="Toggle Audio" size="10" 
+			onclick="toggleAudio()">Toggle Audio</a>
+
+			<select class="gameButton" onchange="control.setDifficulty()" 
+			name="difficulty" id="difficulty">
+
+				<option value="0">Easy</option>
+				<option value="1">Normal</option>
+				<option selected="selected" value="2">Hard</option>
+
+			</select>
+		</div>
+	</div>
+	<div class="container">
+		<p style="margin-bottom: -0.5%; font-weight: bold;">Instructions:</p>
+		<div class="instructions">
+			<p>
+			<b>Player:</b>
+
+				<li> Collect all the coins from a level to get access to 
+					the next </li>
+				<li> To move the player use the arrow keys for movement and 
+					space for shooting </li>
+				<li> Shooting creates a hole destroying a breakable tile 
+					under/next to the player. These holes regenrate after 
+					some time </li>
+				<li> Increase the score by collecting coins and killing 
+					enemies </li>
+			</p>
+		</div>
+
+		<div class="instructions">
+			<p>
+			<b>Enemy:</b>
+
+			<li> If an enemy touches the player the game is lost</li>
+			<li> Enemies can collect coins and drop them after some time</li>
+			<li> Enemies will get stuck in the holes made by the player 
+				and drop a coin if they have one</li>
+			<li> If a hole regenerates with an enemy inside, this enemy 
+				will die </li>
+			<li> If an enemy dies with a coin, the game is lost </li>
+			</p>
+		</div>
+	</div>
+</form>
+
+<script>
+//Eat spacebar, DOWN, and UP key (overflow made the game unplayable)
+window.onkeydown = function(e) { 
+  return !(e.keyCode == 32  || e.keyCode == 38 || e.keyCode == 40);
+};
+</script>
+
+</body></html>
+<!-- código inicial de AMD/2020 -->
+<!-- vim:set ts=4 sw=4 et: -->
